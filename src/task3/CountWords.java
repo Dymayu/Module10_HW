@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CountWords {
     // метод для підрахунку слів
@@ -30,11 +28,17 @@ public class CountWords {
         return wordCountMap;
     }
     public static void displayWordCount(Map<String, Integer> wordCountMap){
-        for(Map.Entry<String, Integer> entry: wordCountMap.entrySet()){
+        // Створюємо список з елементами мапи
+        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(wordCountMap.entrySet());
+
+        // Сортуємо список за значеннями (в порядку спадання)
+        entryList.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
+
+        // Виводимо відсортовані пари ключ-значення
+        for (Map.Entry<String, Integer> entry : entryList) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
-
 
     public static void main(String[] args) throws IOException {
         displayWordCount(couter());
